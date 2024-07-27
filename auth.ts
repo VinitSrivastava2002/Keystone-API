@@ -9,22 +9,24 @@ For more on auth, check out: https://keystonejs.com/docs/apis/auth#authenticatio
 
 // import { createAuth } from '@opensaas/keystone-nextjs-auth';
 
-import { createAuth } from '@keystone-6/auth';
+import { createAuth } from "@keystone-6/auth";
 
 // See https://keystonejs.com/docs/apis/session#session-api for the session docs
-import { statelessSessions } from '@keystone-6/core/session';
+import { statelessSessions } from "@keystone-6/core/session";
 
-import AzureADProvider from 'next-auth/providers/azure-ad';
+// import AzureADProvider from 'next-auth/providers/azure-ad';
 
 let sessionSecret = process.env.SESSION_SECRET;
 
 // Here is a best practice! It's fine to not have provided a session secret in dev,
 // however it should always be there in production.
 if (!sessionSecret) {
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error('The SESSION_SECRET environment variable must be set in production');
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(
+      "The SESSION_SECRET environment variable must be set in production"
+    );
   } else {
-    sessionSecret = '-- DEV COOKIE SECRET; CHANGE ME --';
+    sessionSecret = "-- DEV COOKIE SECRET; CHANGE ME --";
   }
 }
 
@@ -32,14 +34,14 @@ if (!sessionSecret) {
 // What we are saying here is that we want to use the list `User`, and to log in
 // we will need their email and password.
 const { withAuth } = createAuth({
-  listKey: 'User',
-  identityField: 'email',
-  sessionData: 'id name email isAdmin subscription { plan { id } }',
-  secretField: 'password',
+  listKey: "User",
+  identityField: "email",
+  sessionData: "id name email isAdmin subscription { plan { id } }",
+  secretField: "password",
   initFirstItem: {
     // If there are no items in the database, keystone will ask you to create
     // a new user, filling in these fields.
-    fields: ['name', 'email', 'isAdmin', 'password'],
+    fields: ["name", "email", "isAdmin", "password"],
   },
   // providers: [
   //   AzureADProvider({
