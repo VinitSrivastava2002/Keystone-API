@@ -120,5 +120,4 @@ dist
 
 .gitkeep
 custom-mutations\ad-user.ts
-.keystone
 .vscode
